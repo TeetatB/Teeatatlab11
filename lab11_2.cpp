@@ -1,33 +1,35 @@
 #include<iostream>
 #include<string>
-#include<cstdlib>
 #include<ctime>
+#include<cstdlib>
+
 using namespace std;
 
 string cardNames[] = {"","A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 int cardScores[] = {0,1,2,3,4,5,6,7,8,9,10,10,10,10};
 
 int drawCard(void){
-	int x = rand() % 13 + 1;
-	return x;
+  int x= rand() % 13 + 1;
+  return x;
+
 }
 
 int calScore(int x,int y,int z){
-    if(x >= 1 && x <= 13) x = cardScores[x]; 
-    else if(y >= 1 && y <= 13) y = cardScores[y];
-    else if(z >= 1 && z <= 13) z = cardScores[z];
-    return (x+y+z)%10;
+      if(x >= 1 && x <= 13) x = cardScores[x]; 
+      if(y >= 1 && y <= 13) y = cardScores[y];
+      if(z >= 1 && z <= 13) z = cardScores[z];
+    int result = x+y+z;
+    return result%10;
 }
 
-int findYugiAction(int s){
-    int prob = rand()%100 + 1;
-	if(s == 9) return 2;
-	else if(s < 6) return 1;
-	else if(s >= 6 && s <= 8){
-	    if(prob <= 69) return 1;
-	    if(prob > 69) return 2;
+int findYugiAction(int s){	
+	if(s == 9) return 2; 
+	else if(s < 6) return 1; 
+	else{
+	    int d=rand()%100+1;
+	    if(d <= 31) return 2;
+	    else return 1;
 	}
-	return 0;
 }
 
 void checkWinner(int p, int y){
@@ -37,6 +39,8 @@ void checkWinner(int p, int y){
 	else cout <<   "|          Yugi wins!!!         |";
 	cout << "\n---------------------------------\n";
 }
+
+
 
 int main(){	
     srand(time(0)); 
